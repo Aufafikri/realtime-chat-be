@@ -10,9 +10,11 @@ import { MailsModule } from './mails/mails.module';
 import { GoogleStrategy } from './auth/strategies/google.strategy';
 import { ConfigModule } from '@nestjs/config';
 import { GithubStrategy } from './auth/strategies/github.strategy';
+import { ChatModule } from './chat/chat.module';
 import googleOauthConfig from './auth/config/google-oauth.config';
 import githubOauthConfig from './auth/config/github-oauth.config';
 import gmailConfig from './auth/config/gmail.config';
+import { ChatGateway } from './chat/chat.gateway';
 
 @Module({
   imports: [
@@ -29,9 +31,9 @@ import gmailConfig from './auth/config/gmail.config';
       load: [googleOauthConfig, githubOauthConfig, gmailConfig]
     }),
 
-    UsersModule, PrismaModule, AuthModule, MailsModule],
+    UsersModule, PrismaModule, AuthModule, MailsModule, ChatModule],
   controllers: [AppController],
-  providers: [AppService, JwtStrategy, GoogleStrategy, GithubStrategy],
+  providers: [AppService, JwtStrategy, GoogleStrategy, GithubStrategy, ChatGateway],
   exports: [JwtModule]
 })
 
